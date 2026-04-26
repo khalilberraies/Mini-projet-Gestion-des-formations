@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route, NavLink, Navigate } from 'react-router-dom';
+import { Building2 } from 'lucide-react';   // icône bâtiment
 import './App.css';
 
 // Pages
@@ -49,7 +50,9 @@ const DEMO_USERS = {
   responsable:  { role: 'RESPONSABLE',  display: 'Responsable Centre',badge: '⊙ RESP.' },
   utilisateur:  { role: 'UTILISATEUR',  display: 'Utilisateur',       badge: '⊚ USER' },
 };
-const DEMO_PWD = { admin:'admin123', responsable:'resp1234', utilisateur:'user1234' };
+
+// Mots de passe renforcés (conformes aux exigences)
+const DEMO_PWD = { admin:'Admin@2026!', responsable:'Resp@2026!', utilisateur:'User@2026!' };
 
 /* ════════════════════════════════════════════════════════
    LOGIN PAGE
@@ -72,9 +75,12 @@ function LoginPage({ onLogin }) {
   return (
     <div className="login-wrap">
       <div className="login-box">
-        <div className="login-logo">ET</div>
-        <h1 className="login-title">Excellent Training</h1>
-        <p className="login-sub">Centre de formation — Green Building</p>
+        {/* Logo avec icône Building2 et dégradé teal */}
+        <div className="login-logo">
+          <Building2 size={32} strokeWidth={1.8} />
+        </div>
+        <h1 className="login-title">Green Building</h1>
+        <p className="login-sub">Centre de formation — An Excellent Training</p>
 
         <form onSubmit={submit}>
           {error && <div className="login-err">{error}</div>}
@@ -101,15 +107,15 @@ function LoginPage({ onLogin }) {
           <p>Comptes démo</p>
           <div className="demo-row">
             <span className="demo-role">Administrateur</span>
-            <span className="demo-creds">admin / admin123</span>
+            <span className="demo-creds">admin / Admin@2026!</span>
           </div>
           <div className="demo-row">
             <span className="demo-role">Responsable</span>
-            <span className="demo-creds">responsable / resp1234</span>
+            <span className="demo-creds">responsable / Resp@2026!</span>
           </div>
           <div className="demo-row">
             <span className="demo-role">Utilisateur</span>
-            <span className="demo-creds">utilisateur / user1234</span>
+            <span className="demo-creds">utilisateur / User@2026!</span>
           </div>
         </div>
       </div>
@@ -138,11 +144,13 @@ export default function App() {
         {/* ── Sidebar ── */}
         <aside className="sidebar">
           <div className="sb-header">
-            <div className="sb-logo">ET</div>
+            <div className="sb-logo">
+              <Building2 size={22} strokeWidth={1.8} />
+            </div>
             {!collapsed && (
               <div className="sb-brand">
-                <span className="sb-brand-name">Excellent Training</span>
-                <span className="sb-brand-sub">Green Building</span>
+                <span className="sb-brand-name">Green Building</span>
+              
               </div>
             )}
           </div>

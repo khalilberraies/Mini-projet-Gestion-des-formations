@@ -27,4 +27,10 @@ public class StatistiqueController {
     public Map<String, Long> repartitionParProfil() {
         return statistiqueService.repartitionParProfil();
     }
+
+    // Nouvel endpoint : nombre total de participants distincts
+    @GetMapping("/total-participants")
+    public long totalParticipantsDistinct() {
+        return statistiqueService.getTotalParticipantsDistinct();
+    }
 }

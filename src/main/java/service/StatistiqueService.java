@@ -23,7 +23,7 @@ public class StatistiqueService {
         return result;
     }
 
-    // Nombre de participants par année
+    // Nombre de participants par année (inscriptions)
     public Map<Integer, Long> participantsParAnnee() {
         Map<Integer, Long> result = new LinkedHashMap<>();
         int currentYear = java.time.Year.now().getValue();
@@ -39,5 +39,10 @@ public class StatistiqueService {
         participantRepository.countByProfil()
                 .forEach(row -> result.put((String) row[0], (Long) row[1]));
         return result;
+    }
+
+    // Nouvelle méthode : nombre total de participants distincts
+    public long getTotalParticipantsDistinct() {
+        return participantRepository.countDistinctParticipants();
     }
 }

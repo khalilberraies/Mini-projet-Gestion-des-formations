@@ -30,6 +30,7 @@ export default function Statistiques() {
   const [partData,  setPartData]  = useState([]);
   const [profilData,setProfilData]= useState([]);
   const [domData,   setDomData]   = useState([]);
+  const [totalParticipantsDistinct, setTotalParticipantsDistinct] = useState(0);
   const [loading,   setLoading]   = useState(true);
   const [apiErr,    setApiErr]    = useState('');
 
@@ -39,12 +40,13 @@ export default function Statistiques() {
       api.get('/statistiques/participants-par-annee'),
       api.get('/statistiques/repartition-profil'),
       api.get('/formations'),
-    ]).then(([fa, pa, pr, fo]) => {
+      api.get('/statistiques/total-participants')
+    ]).then(([fa, pa, pr, fo, tp]) => {
       setFormData(Object.entries(fa.data).map(([a,c]) => ({ annee:a, Formations:c })));
       setPartData(Object.entries(pa.data).map(([a,c]) => ({ annee:a, Participants:c })));
       setProfilData(Object.entries(pr.data).map(([n,v]) => ({ name:n, value:v })));
+      setTotalParticipantsDistinct(tp.data);
 
-      // Formations by domain (client-side calculation)
       const byDom = {};
       (fo.data||[]).forEach(f => {
         const d = f.domaine?.libelle || 'Sans domaine';
@@ -58,7 +60,6 @@ export default function Statistiques() {
   }, []);
 
   const totalF = formData.reduce((s,d)=>s+d.Formations,0);
-  const totalP = partData.reduce((s,d)=>s+d.Participants,0);
   const cy     = String(new Date().getFullYear());
   const fyThis = formData.find(d=>d.annee===cy)?.Formations||0;
 
@@ -83,9 +84,9 @@ export default function Statistiques() {
           <span className="kpi-label">Formations totales</span>
         </div>
         <div className="kpi-card c-blue">
-          <span className="kpi-icon">◉</span>
-          <span className="kpi-val">{totalP}</span>
-          <span className="kpi-label">Inscriptions</span>
+          <span className="kpi-icon">👥</span>
+          <span className="kpi-val">{totalParticipantsDistinct}</span>
+          <span className="kpi-label">Participants distincts</span>
         </div>
         <div className="kpi-card c-purple">
           <span className="kpi-icon">◑</span>

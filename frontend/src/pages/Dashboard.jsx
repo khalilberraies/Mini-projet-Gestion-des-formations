@@ -44,7 +44,7 @@ export default function Dashboard({ user }) {
         padding:'26px 30px', marginBottom:24, position:'relative', overflow:'hidden',
       }}>
         <div style={{position:'absolute',right:20,top:'50%',transform:'translateY(-50%)',
-          fontSize:80,opacity:.05,fontFamily:'var(--font-head)',fontWeight:800}}>ET</div>
+          fontSize:80,opacity:.05,fontFamily:'var(--font-head)',fontWeight:800}}>GB</div>
         <p style={{fontSize:11,color:'var(--txt-3)',textTransform:'uppercase',letterSpacing:'.09em',fontWeight:600,marginBottom:6}}>
           {greet}
         </p>

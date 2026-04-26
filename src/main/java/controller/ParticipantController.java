@@ -1,5 +1,6 @@
 package com.isi.gestion_formation.controller;
 
+import com.isi.gestion_formation.dto.ParticipantDTO;
 import com.isi.gestion_formation.entity.Participant;
 import com.isi.gestion_formation.service.ParticipantService;
 import jakarta.validation.Valid;
@@ -16,9 +17,10 @@ public class ParticipantController {
 
     private final ParticipantService participantService;
 
+    // Endpoint modifié pour retourner les DTO avec formationCount
     @GetMapping
-    public List<Participant> getAll() {
-        return participantService.findAll();
+    public List<ParticipantDTO> getAll() {
+        return participantService.getAllWithFormationCount();
     }
 
     @GetMapping("/{id}")

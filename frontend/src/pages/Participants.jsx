@@ -28,9 +28,13 @@ export default function Participants() {
   const load = useCallback(async () => {
     try {
       const [p, s, pr] = await Promise.all([
-        api.get('/participants'), api.get('/structures'), api.get('/profils'),
+        api.get('/participants'),   // retourne désormais des ParticipantDTO
+        api.get('/structures'),
+        api.get('/profils'),
       ]);
-      setItems(p.data); setStructures(s.data); setProfils(pr.data);
+      setItems(p.data);
+      setStructures(s.data);
+      setProfils(pr.data);
       setApiErr('');
     } catch {
       setApiErr('Impossible de charger les données. Vérifiez que le serveur tourne sur le port 8080.');
@@ -42,9 +46,16 @@ export default function Participants() {
   const openCreate = () => { setEditItem(null); setForm(EMPTY); setErrors({}); setModal(true); };
   const openEdit   = (item) => {
     setEditItem(item);
-    setForm({ nom:item.nom, prenom:item.prenom, email:item.email||'', tel:item.tel||'',
-      idStructure:item.structure?.id||'', idProfil:item.profil?.id||'' });
-    setErrors({}); setModal(true);
+    setForm({
+      nom: item.nom,
+      prenom: item.prenom,
+      email: item.email || '',
+      tel: item.tel || '',
+      idStructure: item.structureId || '',   // ← clé du DTO
+      idProfil:    item.profilId || ''       // ← clé du DTO
+    });
+    setErrors({});
+    setModal(true);
   };
   const closeModal = () => { setModal(false); setEditItem(null); };
 
@@ -58,8 +69,10 @@ export default function Participants() {
     const errs = validate(form);
     if (Object.keys(errs).length) { setErrors(errs); return; }
     const payload = {
-      nom: form.nom.trim(), prenom: form.prenom.trim(),
-      email: form.email.trim() || null, tel: form.tel.trim() || null,
+      nom: form.nom.trim(),
+      prenom: form.prenom.trim(),
+      email: form.email.trim() || null,
+      tel: form.tel.trim() || null,
       structure: form.idStructure ? { id: Number(form.idStructure) } : null,
       profil:    form.idProfil    ? { id: Number(form.idProfil) }    : null,
     };
@@ -78,10 +91,11 @@ export default function Participants() {
     catch { alert('Suppression impossible.'); }
   };
 
+  // Filtrage : utilise maintenant profilId (chiffre) au lieu de i.profil?.id
   const filtered = items.filter(i => {
     const q = search.toLowerCase();
     const matchSearch = `${i.nom} ${i.prenom} ${i.email||''}`.toLowerCase().includes(q);
-    const matchProf   = !filterProf || String(i.profil?.id) === filterProf;
+    const matchProf   = !filterProf || String(i.profilId) === filterProf;
     return matchSearch && matchProf;
   });
 
@@ -120,7 +134,7 @@ export default function Participants() {
           </thead>
           <tbody>
             {filtered.map(p => {
-              const count = p.formations?.length || 0;
+              const count = p.formationCount ?? 0;          // ← clé du DTO
               return (
                 <tr key={p.id}>
                   <td style={{color:'var(--txt-3)'}}>{p.id}</td>
@@ -135,8 +149,8 @@ export default function Participants() {
                   </td>
                   <td style={{color:'var(--txt-2)',fontSize:12}}>{p.email || '—'}</td>
                   <td style={{color:'var(--txt-2)',fontSize:12}}>{p.tel || '—'}</td>
-                  <td><span className="badge b-amber">{p.structure?.libelle || '—'}</span></td>
-                  <td><span className="badge b-purple">{p.profil?.libelle || '—'}</span></td>
+                  <td><span className="badge b-amber">{p.structureLibelle || '—'}</span></td>
+                  <td><span className="badge b-purple">{p.profilLibelle || '—'}</span></td>
                   <td><span className={`badge ${fCount(count)}`}>{count} / 4</span></td>
                   <td>
                     <div style={{display:'flex', gap:5}}>
