@@ -19,8 +19,12 @@ public class Utilisateur {
     @Column(unique = true)
     private String login;
 
+    @NotBlank(message = "Email obligatoire")
+    @Email(message = "Format email invalide")
+    @Column(unique = true)
+    private String email;
+
     @NotBlank(message = "Mot de passe obligatoire")
-    @Size(min = 8, message = "Mot de passe : 8 caractères minimum")
     private String password;
 
     @ManyToOne
