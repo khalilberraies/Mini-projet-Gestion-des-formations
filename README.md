@@ -119,7 +119,7 @@ npm start
 
 ---
 
-## 📊 Données de démonstration
+##  Données de démonstration
 
 La classe `DataInitializer` remplit automatiquement la base de données avec des données de test si la table `role` est vide.
 
