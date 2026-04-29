@@ -1,24 +1,24 @@
-# 🚀 Gestion de Formation – Excellent Training · Green Building
+# Gestion de Formation – Excellent Training · Green Building
 
 Application full-stack de gestion des formations, avec un back-end Spring Boot (Java) et un front-end React.
 
 ---
 
-## 📖 Introduction
+##  Introduction
 
 Cette plateforme permet de gérer l'ensemble du cycle de vie des formations :  
 catalogue des formations, gestion des participants, formateurs (internes/externes), structures, employeurs, profils, utilisateurs et rôles.  
 
 Elle inclut également un tableau de bord statistique (nombre de formations par année, répartition par profil, etc.).
 
-### 🛠️ Technologies utilisées
+###  Technologies utilisées
 - **Back-end** : Spring Boot 3.5.13, Spring Data JPA, Spring Security, MySQL  
 - **Front-end** : React 19 (create-react-app)  
 - **Base de données** : MySQL 8  
 
 ---
 
-## ⚙️ Prérequis
+##  Prérequis
 
 Avant de lancer l'application, assurez-vous d'avoir installé :
 
@@ -30,7 +30,7 @@ Avant de lancer l'application, assurez-vous d'avoir installé :
 
 ---
 
-## 🗄️ Configuration de la base de données
+##  Configuration de la base de données
 
 ### 1. Démarrer MySQL
 
@@ -59,7 +59,7 @@ server.port=8888
 
 ---
 
-## 🧩 Configuration du backend – Port & CORS
+##  Configuration du backend – Port & CORS
 
 - Le backend fonctionne par défaut sur le port **8888**
 - La configuration CORS est déjà gérée dans `SecurityConfig.java`
@@ -67,7 +67,7 @@ server.port=8888
 
 ---
 
-## 🌐 Configuration du frontend – Proxy (recommandé)
+##  Configuration du frontend – Proxy (recommandé)
 
 Ajoutez dans `frontend/package.json` :
 
@@ -87,7 +87,7 @@ Ajoutez dans `frontend/package.json` :
 
 ---
 
-## 🚀 Lancement de l'application
+##  Lancement de l'application
 
 ### 1. Backend (Spring Boot)
 
@@ -158,7 +158,7 @@ gestion-formation/
 
 ---
 
-## 📄 Licence
+##  Licence
 
 Ce projet est distribué sous la licence MIT.
 Vous êtes libre de l’utiliser, de le modifier et de le distribuer, à condition de conserver la mention de copyright et la licence dans toutes les copies.
