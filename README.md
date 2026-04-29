@@ -158,13 +158,6 @@ gestion-formation/
 
 ---
 
-## 👥 Auteurs
-
-Projet réalisé dans le cadre du module Mini-projet BD et POO – 2ème semestre 2025-2026.  
-Basé sur l’environnement Excellent Training – Green Building.
-
----
-
 ## 📄 Licence
 
 Projet à usage pédagogique. Libre de le modifier et de le distribuer.
