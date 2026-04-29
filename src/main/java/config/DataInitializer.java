@@ -40,9 +40,30 @@ public class DataInitializer implements CommandLineRunner {
 
         // 2. UTILISATEURS
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        utilisateurRepo.save(new Utilisateur(null, "admin",       encoder.encode("Admin@2026!"),   roleAdmin));
-        utilisateurRepo.save(new Utilisateur(null, "responsable", encoder.encode("Resp@2026!"),   roleResp));
-        utilisateurRepo.save(new Utilisateur(null, "utilisateur", encoder.encode("User@2026!"),   roleUser));
+
+        utilisateurRepo.save(new Utilisateur(
+                null,
+                "admin",
+                "admin@greenbuilding.tn",
+                encoder.encode("GreenB@Admin2026#"),
+                roleAdmin
+        ));
+
+        utilisateurRepo.save(new Utilisateur(
+                null,
+                "responsable",
+                "responsable@greenbuilding.tn",
+                encoder.encode("GreenB@Resp2026#"),
+                roleResp
+        ));
+
+        utilisateurRepo.save(new Utilisateur(
+                null,
+                "utilisateur",
+                "utilisateur@greenbuilding.tn",
+                encoder.encode("GreenB@User2026#"),
+                roleUser
+        ));
 
         // 3. DOMAINES
         Domaine dInfo   = domaineRepo.save(new Domaine(null, "Informatique & Numérique"));
